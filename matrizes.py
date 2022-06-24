@@ -72,6 +72,7 @@ def caso2p2(n_bkp: int, matriz: list, coluna: int, linha: int):
             matriz[i][j] = valor
             valor += 1
     diagonalPrincipal(matriz, n_bkp, coluna, linha)
+    
 #================================
 def diagonalPrincipal(matriz, n_bkp, coluna, linha):
     coluna = 0
@@ -92,12 +93,10 @@ def diagonalPrincipal(matriz, n_bkp, coluna, linha):
         linha -= 1
         valorIncluso += 7
 
-    
-    for i in range(n_bkp):
-        print(matriz[i])
-
     return matriz
-    
+
+#=======================================================================
+
 #========================================================================
 def main():
     n = int(input())
