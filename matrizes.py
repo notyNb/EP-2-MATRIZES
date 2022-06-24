@@ -100,7 +100,8 @@ def diagonalPrincipal(matriz, n_bkp, coluna, linha):
     return matriz
 
 #========================================================================
-
+def caso3():
+    # ainda em desenvolvimento 24/06
 #========================================================================
 def imprimir(matriz: list, coluna: int, linha: int):
     for i in range(coluna):
