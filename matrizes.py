@@ -1,6 +1,4 @@
-def casoImpar(n_bkp: int, matriz: list):
-    coluna = n_bkp
-    linha = n_bkp
+def casoImpar(matriz: list, coluna: int, linha: int):
     for i in range(coluna):
         linhas = [0] * linha
         matriz.append(linhas)
@@ -63,13 +61,54 @@ def imprimir(matriz: list, coluna: int, linha: int):
         for j in range(linha):
             print(matriz[i][j], end="\t")
         print()
+#========================================================================
+def caso2p2(n_bkp: int, matriz: list, coluna: int, linha: int):
+    valor = 1
+    for i in range(n_bkp):
+        row = [0] * n_bkp
+        matriz.append(row)
+    for i in range(n_bkp):
+        for j in range(n_bkp):
+            matriz[i][j] = valor
+            valor += 1
+    diagonalPrincipal(matriz, n_bkp, coluna, linha)
+#================================
+def diagonalPrincipal(matriz, n_bkp, coluna, linha):
+    coluna = 0
+    linha = 0
+    valorIncluso = 1
+    for i in range(n_bkp): # Diagonal da esquerda pra direita
+        matriz[coluna][linha] = (n_bkp ** 2 + 1) - valorIncluso
+        coluna += 1
+        linha += 1
+        valorIncluso += 9
 
+    coluna = 0
+    linha = n_bkp - 1
+    valorIncluso = 8
+    for i in range(n_bkp): # Diagonal da direita pra esquerda
+        matriz[coluna][linha] = (n_bkp ** 2 + 1) - valorIncluso
+        coluna += 1
+        linha -= 1
+        valorIncluso += 7
+
+    
+    for i in range(n_bkp):
+        print(matriz[i])
+
+    return matriz
+    
 #========================================================================
 def main():
     n = int(input())
     matriz = []
-    n_bkp = n    
+    n_bkp = n
+    coluna = n_bkp
+    linha = n_bkp
     if n % 2 != 0:
-        casoImpar(n_bkp, matriz)
+        casoImpar(matriz, coluna, linha)
+    elif n % 4 == 0:
+        caso2p2(n_bkp, matriz, coluna, linha)
+        imprimir(matriz, coluna, linha)
     
 main()
