@@ -54,15 +54,10 @@ def casoImpar(matriz: list, coluna: int, linha: int):
                         valor_inicial += 1
                         coluna1 = (coluna1_bkp + 1)
                         linha1 = linha1_bkp
-    imprimir(matriz, coluna, linha)
+    return matriz
+
 #========================================================================
-def imprimir(matriz: list, coluna: int, linha: int):
-    for i in range(coluna):
-        for j in range(linha):
-            print(matriz[i][j], end="\t")
-        print()
-#========================================================================
-def caso2p2(n_bkp: int, matriz: list, coluna: int, linha: int):
+def caso2(n_bkp: int, matriz: list, coluna: int, linha: int):
     valor = 1
     for i in range(n_bkp):
         row = [0] * n_bkp
@@ -71,32 +66,47 @@ def caso2p2(n_bkp: int, matriz: list, coluna: int, linha: int):
         for j in range(n_bkp):
             matriz[i][j] = valor
             valor += 1
+        
     diagonalPrincipal(matriz, n_bkp, coluna, linha)
     
-#================================
+#=========================================================================
 def diagonalPrincipal(matriz, n_bkp, coluna, linha):
-    coluna = 0
-    linha = 0
-    valorIncluso = 1
-    for i in range(n_bkp): # Diagonal da esquerda pra direita
-        matriz[coluna][linha] = (n_bkp ** 2 + 1) - valorIncluso
-        coluna += 1
-        linha += 1
-        valorIncluso += 9
+    alcance = n_bkp // 4
+    coluna = -4
+    for tamanho in range(alcance):
+        linha = -4
+        coluna += 4
+        for a in range(alcance):
+            linha += 4
+            linha_usada = linha
+            coluna_usada = coluna
+            for i in range(4): # Diagonais da esquerda pra direita
+                valorIncluso = matriz[coluna_usada][linha_usada]
+                matriz[coluna_usada][linha_usada] = (n_bkp ** 2 + 1) - valorIncluso
+                coluna_usada += 1
+                linha_usada += 1
 
-    coluna = 0
-    linha = n_bkp - 1
-    valorIncluso = 8
-    for i in range(n_bkp): # Diagonal da direita pra esquerda
-        matriz[coluna][linha] = (n_bkp ** 2 + 1) - valorIncluso
-        coluna += 1
-        linha -= 1
-        valorIncluso += 7
+        linha = n_bkp + 3
+        for b in range(alcance):
+            linha -= 4
+            linha_usada = linha
+            coluna_usada = coluna
+            for i in range(4): # Diagonais da direita pra esquerda
+                valorIncluso = matriz[coluna_usada][linha_usada]
+                matriz[coluna_usada][linha_usada] = (n_bkp ** 2 + 1) - valorIncluso
+                coluna_usada += 1
+                linha_usada -= 1
 
     return matriz
 
-#=======================================================================
+#========================================================================
 
+#========================================================================
+def imprimir(matriz: list, coluna: int, linha: int):
+    for i in range(coluna):
+        for j in range(linha):
+            print(matriz[i][j], end="\t")
+        print()
 #========================================================================
 def main():
     n = int(input())
@@ -106,8 +116,12 @@ def main():
     linha = n_bkp
     if n % 2 != 0:
         casoImpar(matriz, coluna, linha)
+        imprimir(matriz, coluna, linha)
     elif n % 4 == 0:
-        caso2p2(n_bkp, matriz, coluna, linha)
+        caso2(n_bkp, matriz, coluna, linha)
+        imprimir(matriz, coluna, linha)
+    else:
+        caso3(matriz, coluna, linha)
         imprimir(matriz, coluna, linha)
     
 main()
