@@ -1,7 +1,8 @@
 # EP-2-MATRIZES
 Exercício programa 2 - MATRIZES - PYTHON
 
-Código ainda em desenvolvimento
+Código completo!
+25/06
 
 Caso 1 - Completo
 Caso 2 - Completo
